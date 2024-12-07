@@ -5,6 +5,7 @@ const express = require('express')
 const middlewareLogRequest = require('./middleware/logs')
 
 const authRoutes = require('./routes/auth')
+const forumRoutes = require('./routes/forum')
 
 const app = express(middlewareLogRequest)
 
@@ -13,6 +14,7 @@ app.use(express.json())
 app.use(middlewareLogRequest)
 
 app.use(authRoutes)
+app.use(forumRoutes)
 
 app.listen(PORT, () => {
     console.log(`server berjalan di port ${PORT}`)

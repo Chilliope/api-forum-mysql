@@ -4,6 +4,7 @@ const AuthModel = require('../models/auth')
 
 const SECRET_KEY = process.env.SECRET_KEY
 
+
 const login = async (req, res) => {
     const { body } = req
     try {
@@ -28,10 +29,12 @@ const login = async (req, res) => {
         const token = jwt.sign(
             {
                 id: user.id,
-                username: user.username,
             },
             SECRET_KEY,
-            { expiresIn: '12' } // Token berlaku selama 12 jam
+            { 
+                "algorithm": "HS256",
+                expiresIn: 86400 
+            } 
         );
 
         res.json({
