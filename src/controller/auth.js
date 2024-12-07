@@ -1,5 +1,8 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
 const AuthModel = require('../models/auth')
+
+const SECRET_KEY = process.env.SECRET_KEY
 
 const login = async (req, res) => {
     const { body } = req
@@ -12,8 +15,34 @@ const login = async (req, res) => {
             })
         } 
 
+        const user = data[0]
+
+        const isPasswordMatch = await bcrypt.compare(body.password, user.password)
+        if(!isPasswordMatch) {
+            return res.status(401).json({
+                'status': 'unauthorized',
+                'message': 'invalid password'
+            })
+        }
+
+        const token = jwt.sign(
+            {
+                id: user.id,
+                username: user.username,
+            },
+            SECRET_KEY,
+            { expiresIn: '12' } // Token berlaku selama 12 jam
+        );
+
         res.json({
-            data: data
+            status: 'success',
+            message: 'Login Success',
+            data: {
+                id: user.id,
+                username: user.username,
+                fullname: user.fullname,
+                token: token
+            }
         })
     } catch (error) {
         res.json({
