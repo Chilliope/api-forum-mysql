@@ -8,6 +8,7 @@ const app = express(middlewareLogRequest)
 
 app.use(middlewareLogRequest)
 
+
 app.listen(PORT, () => {
     console.log(`server berjalan di port ${PORT}`)
 })
