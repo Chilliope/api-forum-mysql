@@ -7,7 +7,7 @@ const loginProcess = (body) => {
 }
 
 const registrationProcess = (body) => {
-    const SQLQuery = `INSERT INTO users (fullname, username, password, image) 
+    const SQLQuery = `INSERT INTO users (fullname, username, password, image, created_at) 
                       VALUES (
                       '${body.fullname}', 
                       '${body.username}', 
