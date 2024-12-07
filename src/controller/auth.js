@@ -56,7 +56,6 @@ const login = async (req, res) => {
 }
 
 const registration = async (req, res) => {
-    
     const { body } = req
     const saltRounds = 10
     const currentDate = new Date().toISOString().split('T')[0];

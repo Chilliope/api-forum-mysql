@@ -1,6 +1,6 @@
 const dbPool = require('../config/database')
 
-const createNewPost = (body) => {
+const createNewForum = (body) => {
     const SQLQuery = `INSERT INTO forums (user_id, title, post, created_at)
                       VALUES (
                       '${body.user_id}', 
@@ -12,5 +12,5 @@ const createNewPost = (body) => {
 }
 
 module.exports = {
-    createNewPost
+    createNewForum
 }

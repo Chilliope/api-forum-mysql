@@ -1,11 +1,8 @@
 const ForumModel = require('../models/forum')
 
-const createForum = (req, res) => {
+const createForum = async (req, res) => {
     const { body } = req
     const currentDate = new Date().toISOString().split('T')[0];
-    res.json({
-        message: 'ada bre'
-    })
     try {
         const data = {
             user_id: req.user.id, 
@@ -14,9 +11,16 @@ const createForum = (req, res) => {
             created_at: currentDate
         }
 
-        console.log(data)
+        await ForumModel.createNewForum(data)
+
+        res.status(201).json({
+            message: 'Create Forum Success',
+            data: data 
+        })
     } catch (error) {
-        
+        res.status(400).json({
+            message: 'Create Forum Failed'
+        })
     }
 }
 
