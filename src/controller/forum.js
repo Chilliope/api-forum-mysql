@@ -40,7 +40,27 @@ const createForum = async (req, res) => {
     }
 }
 
+const updateForum = async (req, res) => {
+    const { id } = req.params
+    const { body } = req
+
+    try {
+        await ForumModel.updateForum(body, id)
+
+        res.status(201).json({
+            message: 'Update Forum Success',
+            data: body
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: 'Update Forum Failed',
+            error: error.message
+        })
+    }
+}
+
 module.exports = {
     getAllForum,
-    createForum
+    createForum,
+    updateForum
 }

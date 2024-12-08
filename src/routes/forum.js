@@ -12,4 +12,7 @@ router.get('/forum', authMiddleware, ForumController.getAllForum)
 // POST - CREATE FORUM
 router.post('/forum', authMiddleware, ForumController.createForum)
 
+// PATCH - UPDATE FORUM
+router.patch('/forum/:id', authMiddleware, ForumController.updateForum)
+
 module.exports = router

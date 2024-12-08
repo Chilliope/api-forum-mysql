@@ -17,7 +17,18 @@ const createNewForum = (body) => {
     return dbPool.execute(SQLQuery)
 }
 
+const updateForum = (body, id) => {
+    const SQLQuery = `UPDATE forums 
+                      SET 
+                      title='${body.title}', 
+                      post='${body.post}' 
+                      WHERE id = ${id}`
+    
+    return dbPool.execute(SQLQuery)
+}
+
 module.exports = {
     getAllForum,
-    createNewForum
+    createNewForum,
+    updateForum
 }
