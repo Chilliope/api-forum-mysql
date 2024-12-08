@@ -65,7 +65,9 @@ const deleteForum = async (req, res) => {
     try {
         await ForumModel.deleteForum(id)
 
-        res.status(204)
+        res.status(204).json({
+            message: 'Delete Forum Success'
+        })
     } catch (error) {
         res.json(400).json({
             message: 'Forum Delete Failed',

@@ -1,5 +1,22 @@
 const PostModel = require('../models/post')
 
+const getAllPost = async (req, res) => {
+    const { forumId } = req.params 
+
+    try {
+        const [ data ] = await PostModel.getAllPost(forumId)
+
+        res.status(200).json({
+            message: 'Get All Post Success',
+            data: data
+        })
+    } catch (error) {
+        res.status(403).json({
+            message: 'Get All Post Failed'
+        })
+    }
+}
+
 const createNewPost = async (req, res) => {
     const { body } = req
     const { forumId } = req.params
@@ -27,6 +44,44 @@ const createNewPost = async (req, res) => {
     }
 }
 
+const updatePost = async (req, res) => {
+    const { body } = req
+    const { id } = req.params
+
+    try {
+        await PostModel.updatePost(body, id)
+
+        res.status(201).json({
+            message: 'Update Post Success',
+            data: body
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: 'Update Post Failed',
+            error: error.message
+        })
+    }
+}
+
+const deletePost = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        await PostModel.deletePost(id)
+
+        res.status(204).json({
+            message: 'Delete Post Success'
+        })
+    } catch (error) {
+        res.status(403).json({
+            message: 'Delete Post Failed'
+        })
+    }
+}
+
 module.exports = {
-    createNewPost
+    getAllPost,
+    createNewPost,
+    updatePost,
+    deletePost
 }
