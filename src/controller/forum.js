@@ -1,5 +1,21 @@
 const ForumModel = require('../models/forum')
 
+const getAllForum = async (req, res) => {
+    try {
+        const [ data ] = await ForumModel.getAllForum()
+
+        res.status(200).json({
+            message: 'Get All Forum Success',
+            data: data
+        })
+    } catch (error) {
+        res.status(404).json({
+            message: 'Get All Forum Failed',
+            error: error.message
+        })        
+    }
+}
+
 const createForum = async (req, res) => {
     const { body } = req
     const currentDate = new Date().toISOString().split('T')[0];
@@ -25,5 +41,6 @@ const createForum = async (req, res) => {
 }
 
 module.exports = {
+    getAllForum,
     createForum
 }
