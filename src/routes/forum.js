@@ -15,4 +15,7 @@ router.post('/forum', authMiddleware, ForumController.createForum)
 // PATCH - UPDATE FORUM
 router.patch('/forum/:id', authMiddleware, ForumController.updateForum)
 
+// DELETE - DELETE FORUM
+router.delete('/forum/:id', authMiddleware, ForumController.deleteForum)
+
 module.exports = router

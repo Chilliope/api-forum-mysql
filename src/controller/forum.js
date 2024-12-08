@@ -59,8 +59,24 @@ const updateForum = async (req, res) => {
     }
 }
 
+const deleteForum = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        await ForumModel.deleteForum(id)
+
+        res.status(204)
+    } catch (error) {
+        res.json(400).json({
+            message: 'Forum Delete Failed',
+            error: error.message
+        })
+    }
+}
+
 module.exports = {
     getAllForum,
     createForum,
-    updateForum
+    updateForum,
+    deleteForum
 }
