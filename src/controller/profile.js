@@ -20,13 +20,15 @@ const editProfile = async (req, res) => {
         const oldImagePath = path.join(__dirname, '../../public/profile_picture', user.image)
 
         if(data.image != user.image) {
-            fs.unlink(oldImagePath, (err) => {
-                if(err) {
-                    console.log('failed to delete old image', err.message)
-                } else {
-                    console.log('success to delete old image')
-                }
-            })
+            if(user.image != 'default.jpg') {
+                fs.unlink(oldImagePath, (err) => {
+                    if(err) {
+                        console.log('failed to delete old image', err.message)
+                    } else {
+                        console.log('success to delete old image')
+                    }
+                })
+            }
         } 
 
         // console.log('data:', data, 'id:', id)
