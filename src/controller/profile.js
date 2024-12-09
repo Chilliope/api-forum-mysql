@@ -1,17 +1,35 @@
 const profile = require('../models/profile')
+const fs = require('fs')
+const path = require('path')
+
 
 const editProfile = async (req, res) => {
     const { body, file } = req
     const id = req.user.id
-
+    
     try {
+        const [ user ] = await profile.getProfile(id)
+        // console.log('gambar:', user.image)
+        
         const data = {
             fullname: body.fullname,
             username: body.username,
-            image: file ? file.filename : null
+            image: file ? file.filename : user.image
         }
 
-        console.log('data:', data, 'id:', id)
+        const oldImagePath = path.join(__dirname, '../../public/profile_picture', user.image)
+
+        if(data.image != user.image) {
+            fs.unlink(oldImagePath, (err) => {
+                if(err) {
+                    console.log('failed to delete old image', err.message)
+                } else {
+                    console.log('success to delete old image')
+                }
+            })
+        } 
+
+        // console.log('data:', data, 'id:', id)
 
         await profile.editProfile(data, id)
 
