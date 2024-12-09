@@ -1,7 +1,7 @@
 const dbPool = require('../config/database')
 
-const getAllPost = (id) => {
-    const SQLQuery = `SELECT * FROM posts WHERE forum_id = ${id}`
+const getAllPost = (id, offset, limit) => {
+    const SQLQuery = `SELECT * FROM posts WHERE forum_id = ${id} LIMIT ${limit} OFFSET ${offset}`
 
     return dbPool.execute(SQLQuery)
 }

@@ -1,18 +1,27 @@
 const PostModel = require('../models/post')
 
-const getAllPost = async (req, res) => {
+const getAllPost = async (req, res) => {   
     const { forumId } = req.params 
-
+    
     try {
-        const [ data ] = await PostModel.getAllPost(forumId)
+        const page = parseInt(req.query.page) || 1 // Default page = 1
+        const limit = parseInt(req.query.limit) || 10 // Default limit = 10
+        const offset = (page - 1) * limit
+
+        const [ data ] = await PostModel.getAllPost(forumId, offset, limit)
 
         res.status(200).json({
             message: 'Get All Post Success',
-            data: data
+            data: data,
+            pagination: {
+                currentPage: page,
+                limit: limit,
+            },
         })
     } catch (error) {
         res.status(403).json({
-            message: 'Get All Post Failed'
+            message: 'Get All Post Failed',
+            error: error.message
         })
     }
 }
