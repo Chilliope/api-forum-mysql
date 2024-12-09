@@ -1,9 +1,9 @@
 const dbPool = require('../config/database')
 
-const getAllForum = () => {
-    const SQLQuery = 'SELECT * FROM forums'
+const getAllForum = (offset, limit) => {
+    const SQLQuery = `SELECT * FROM forums LIMIT ${limit} OFFSET ${offset}`;
 
-    return dbPool.execute(SQLQuery)
+    return dbPool.execute(SQLQuery);
 }
 
 const createNewForum = (body) => {

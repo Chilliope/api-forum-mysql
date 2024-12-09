@@ -2,17 +2,25 @@ const ForumModel = require('../models/forum')
 
 const getAllForum = async (req, res) => {
     try {
-        const [ data ] = await ForumModel.getAllForum()
+        const page = parseInt(req.query.page) || 1 // Default page = 1
+        const limit = parseInt(req.query.limit) || 10 // Default limit = 10
+        const offset = (page - 1) * limit
+
+        const [data] = await ForumModel.getAllForum(offset, limit)
 
         res.status(200).json({
             message: 'Get All Forum Success',
-            data: data
+            data: data,
+            pagination: {
+                currentPage: page,
+                limit: limit,
+            },
         })
     } catch (error) {
         res.status(404).json({
             message: 'Get All Forum Failed',
-            error: error.message
-        })        
+            error: error.message,
+        })
     }
 }
 
