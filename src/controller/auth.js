@@ -37,7 +37,7 @@ const login = async (req, res) => {
             } 
         );
 
-        res.json({
+        res.status(201).json({
             status: 'success',
             message: 'Login Success',
             data: {
@@ -48,7 +48,7 @@ const login = async (req, res) => {
             }
         })
     } catch (error) {
-        res.json({
+        res.status(403).json({
             message: 'Login Gagal',
             errorMessage: error
         })
