@@ -1,6 +1,7 @@
 require('dotenv').config()
 const PORT = process.env.PORT || 5000
 const express = require('express')
+const cors = require('cors')
 
 const middlewareLogRequest = require('./middleware/logs')
 const upload = require('./middleware/multer')
@@ -11,6 +12,13 @@ const postRoutes = require('./routes/post')
 const profileRoutes = require('./routes/profile')
 
 const app = express(middlewareLogRequest)
+
+// Konfigurasi CORS
+app.use(cors({
+    origin: 'http://localhost:5173', // Ganti dengan origin frontend Anda
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Metode HTTP yang diizinkan
+    credentials: true // Jika menggunakan cookie
+}))
 
 app.use(express.json())
 

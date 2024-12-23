@@ -72,12 +72,12 @@ const registration = async (req, res) => {
 
         await AuthModel.registrationProcess(data)
         
-        res.json({
+        res.status(201).json({
             message: 'Registration Success',
             data: data
         })
     } catch (error) {
-       res.json({
+       res.status(403).json({
         message: 'Registration Failed',
         error: error.message
        }) 
