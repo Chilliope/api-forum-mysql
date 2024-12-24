@@ -1,7 +1,7 @@
 const dbPool = require('../config/database')
 
 const getAllForum = (offset, limit) => {
-    const SQLQuery = `SELECT * FROM forums LIMIT ${limit} OFFSET ${offset}`;
+    const SQLQuery = `SELECT * FROM forums JOIN users ON forums.user_id = users.id LIMIT ${limit} OFFSET ${offset}`;
 
     return dbPool.execute(SQLQuery);
 }
