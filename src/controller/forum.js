@@ -8,12 +8,18 @@ const getAllForum = async (req, res) => {
 
         const [data] = await ForumModel.getAllForum(offset, limit)
 
+        const [totalDataResult] = await ForumModel.getTotalForumCount()
+        const totalData = totalDataResult[0].total
+
+        totalPage = Math.ceil(totalData / limit)
+
         res.status(200).json({
             message: 'Get All Forum Success',
             data: data,
             pagination: {
                 currentPage: page,
                 limit: limit,
+                totalPage: totalPage,
             },
         })
     } catch (error) {
