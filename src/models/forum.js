@@ -6,22 +6,31 @@ const getTotalForumCount = () => {
 }
 
 const getAllForum = (offset, limit) => {
-    const SQLQuery = `SELECT forums.id AS forum_id, forums.user_id, forums.title, forums.created_at,
-        users.fullname, users.username, users.password, users.image
+    const SQLQuery = `
+        SELECT 
+            forums.id AS forum_id, 
+            forums.user_id, 
+            forums.title, 
+            forums.created_at,
+            users.fullname, 
+            users.username, 
+            users.password, 
+            users.image
         FROM forums
         JOIN users ON forums.user_id = users.id
+        ORDER BY forums.id DESC -- Urutkan berdasarkan ID dari yang terbaru
         LIMIT ${limit} OFFSET ${offset}
-    `
+    `;
 
-    return dbPool.execute(SQLQuery);
+    return dbPool.execute(SQLQuery)
 }
 
+
 const createNewForum = (body) => {
-    const SQLQuery = `INSERT INTO forums (user_id, title, post, created_at)
+    const SQLQuery = `INSERT INTO forums (user_id, title, created_at)
                       VALUES (
                       '${body.user_id}', 
                       '${body.title}', 
-                      '${body.post}', 
                       '${body.created_at}')`
 
     return dbPool.execute(SQLQuery)

@@ -37,7 +37,6 @@ const createForum = async (req, res) => {
         const data = {
             user_id: req.user.id, 
             title: body.title,
-            post: body.post,
             created_at: currentDate
         }
 
@@ -49,7 +48,8 @@ const createForum = async (req, res) => {
         })
     } catch (error) {
         res.status(400).json({
-            message: 'Create Forum Failed'
+            message: 'Create Forum Failed',
+            error: error.message
         })
     }
 }
