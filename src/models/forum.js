@@ -15,15 +15,21 @@ const getAllForum = (offset, limit) => {
             users.fullname, 
             users.username, 
             users.password, 
-            users.image
+            users.image,
+            (
+                SELECT COUNT(*) 
+                FROM posts 
+                WHERE posts.forum_id = forums.id
+            ) AS post_count -- Hitung jumlah post dengan forum_id yang sesuai
         FROM forums
         JOIN users ON forums.user_id = users.id
         ORDER BY forums.id DESC -- Urutkan berdasarkan ID dari yang terbaru
         LIMIT ${limit} OFFSET ${offset}
-    `;
+    `
 
     return dbPool.execute(SQLQuery)
 }
+
 
 
 const createNewForum = (body) => {
