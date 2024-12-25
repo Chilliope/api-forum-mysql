@@ -29,11 +29,13 @@ const login = async (req, res) => {
         const token = jwt.sign(
             {
                 id: user.id,
+                username: user.username,
+                fullname: user.fullname,
+                image: user.image
             },
             SECRET_KEY,
             { 
                 "algorithm": "HS256",
-                expiresIn: 86400 
             } 
         );
 
@@ -47,6 +49,7 @@ const login = async (req, res) => {
                 token: token
             }
         })
+
     } catch (error) {
         res.status(403).json({
             message: 'Login Gagal',
@@ -84,7 +87,14 @@ const registration = async (req, res) => {
     }
 }
 
+const authUser = (req, res) => {
+    res.json({
+        user: req.user
+    })
+}
+
 module.exports = {
     login,
-    registration
+    registration,
+    authUser
 }

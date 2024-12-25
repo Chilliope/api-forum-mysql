@@ -18,7 +18,8 @@ const registrationProcess = (body) => {
     return dbPool.execute(SQLQuery)
 } 
 
+
 module.exports = {
     loginProcess,
-    registrationProcess
+    registrationProcess,
 }
