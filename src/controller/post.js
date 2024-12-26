@@ -1,4 +1,5 @@
 const PostModel = require('../models/post')
+const ForumModel = require('../models/forum')
 
 const getAllPost = async (req, res) => {   
     const { forumId } = req.params 
@@ -9,9 +10,11 @@ const getAllPost = async (req, res) => {
         const offset = (page - 1) * limit
 
         const [ data ] = await PostModel.getAllPost(forumId, offset, limit)
+        const [ forumData ] = await ForumModel.getSingleForum(forumId)  
 
         res.status(200).json({
             message: 'Get All Post Success',
+            forumData: forumData,
             data: data,
             pagination: {
                 currentPage: page,

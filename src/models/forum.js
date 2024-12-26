@@ -30,7 +30,11 @@ const getAllForum = (offset, limit) => {
     return dbPool.execute(SQLQuery)
 }
 
+const getSingleForum = (forumId) => {
+    const SQLQuery = `SELECT * FROM forums WHERE id = ${forumId}`
 
+    return dbPool.execute(SQLQuery)
+}
 
 const createNewForum = (body) => {
     const SQLQuery = `INSERT INTO forums (user_id, title, created_at)
@@ -61,6 +65,7 @@ const deleteForum = (id) => {
 module.exports = {
     getTotalForumCount,
     getAllForum,
+    getSingleForum,
     createNewForum,
     updateForum,
     deleteForum
