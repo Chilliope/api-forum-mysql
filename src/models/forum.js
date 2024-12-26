@@ -31,7 +31,18 @@ const getAllForum = (offset, limit) => {
 }
 
 const getSingleForum = (forumId) => {
-    const SQLQuery = `SELECT * FROM forums WHERE id = ${forumId}`
+    const SQLQuery = `SELECT             
+            forums.id AS forum_id, 
+            forums.user_id, 
+            forums.title, 
+            forums.created_at,
+            users.fullname, 
+            users.username, 
+            users.password, 
+            users.image
+            FROM forums
+            JOIN users ON forums.user_id = users.id
+            WHERE forums.id = ${forumId}`
 
     return dbPool.execute(SQLQuery)
 }
