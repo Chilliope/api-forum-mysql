@@ -60,8 +60,7 @@ const createNewForum = (body) => {
 const updateForum = (body, id) => {
     const SQLQuery = `UPDATE forums 
                       SET 
-                      title='${body.title}', 
-                      post='${body.post}' 
+                      title='${body.title}'
                       WHERE id = ${id}`
     
     return dbPool.execute(SQLQuery)

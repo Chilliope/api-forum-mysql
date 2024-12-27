@@ -1,4 +1,5 @@
 const ForumModel = require('../models/forum')
+const PostModel = require('../models/post')
 
 const getAllForum = async (req, res) => {
     try {
@@ -78,6 +79,7 @@ const deleteForum = async (req, res) => {
 
     try {
         await ForumModel.deleteForum(id)
+        await PostModel.deletePostByForum(id)
 
         res.status(204).json({
             message: 'Delete Forum Success'

@@ -17,7 +17,7 @@ const app = express(middlewareLogRequest)
 // Konfigurasi CORS
 app.use(cors({
     origin: 'http://localhost:5173', // Ganti dengan origin frontend Anda
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Metode HTTP yang diizinkan
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Metode HTTP yang diizinkan
     credentials: true // Jika menggunakan cookie
 }))
 

@@ -37,9 +37,16 @@ const deletePost = (id) => {
     return dbPool.execute(SQLQuery)
 }
 
+const deletePostByForum = (forumId) => {
+    const SQLQuery = `DELETE FROM posts WHERE forum_id = ${forumId}`
+
+    return dbPool.execute(SQLQuery)
+}
+
 module.exports = {
     getAllPost,
     createNewPost,
     updatePost,
-    deletePost
+    deletePost,
+    deletePostByForum
 }
