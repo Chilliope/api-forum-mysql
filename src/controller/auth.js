@@ -35,9 +35,11 @@ const login = async (req, res) => {
             },
             SECRET_KEY,
             { 
-                "algorithm": "HS256",
-            } 
-        );
+                algorithm: "HS256",
+                expiresIn: "24h"
+            }
+        )
+        
 
         res.status(201).json({
             status: 'success',
