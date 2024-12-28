@@ -11,6 +11,15 @@ const getAllPost = (id, offset, limit) => {
     return dbPool.execute(SQLQuery)
 }
 
+const getAllYourPost = (user_id) => {
+    const SQLQuery = `SELECT * FROM posts 
+                      JOIN forum ON posts.forum_id = forum.id
+                      JOIN users ON posts.user_id = users.id
+                      WHERE user_id = ${user_id}`
+
+    return dbPool.execute(SQLQuery)
+}
+
 const createNewPost = (body) => {
     const SQLQuery = `INSERT INTO posts (user_id, forum_id, post, created_at)
                       VALUES (
@@ -45,6 +54,7 @@ const deletePostByForum = (forumId) => {
 
 module.exports = {
     getAllPost,
+    getAllYourPost,
     createNewPost,
     updatePost,
     deletePost,

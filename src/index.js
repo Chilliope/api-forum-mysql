@@ -11,6 +11,7 @@ const authRoutes = require('./routes/auth')
 const forumRoutes = require('./routes/forum')
 const postRoutes = require('./routes/post')
 const profileRoutes = require('./routes/profile')
+const yourPostRoutes = require('./routes/yourPost')
 
 const app = express(middlewareLogRequest)
 
@@ -30,6 +31,7 @@ app.use(authRoutes)
 app.use(forumRoutes)
 app.use(postRoutes)
 app.use(profileRoutes)
+app.use(yourPostRoutes)
 
 app.post('/upload', upload.single('image'), (req, res) => {
     res.json({
