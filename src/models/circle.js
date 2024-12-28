@@ -28,8 +28,15 @@ const editCircle = (body, circleId) => {
     return dbPool.execute(SQLQuery)
 } 
 
+const deleteCircle = (circleId) => {
+    const SQLQuery = `DELETE FROM circles WHERE id = ${circleId}`
+
+    return dbPool.execute(SQLQuery)
+}
+
 module.exports = {
     getSingleCircle,
     createCircle,
     editCircle,
+    deleteCircle
 }

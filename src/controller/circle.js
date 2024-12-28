@@ -25,7 +25,6 @@ const editCircle = async (req, res) => {
     const { body, file } = req
     const circleId = req.params.id
     const leaderId = req.user.id
-    console.log(file)
     const [circle] = await CircleModel.getSingleCircle(circleId)
     const circleData = circle[0]
 
@@ -53,7 +52,32 @@ const editCircle = async (req, res) => {
     }
 }
 
+const deleteCircle = async (req, res) => {
+    const circleId = req.params.id
+    const leaderId = req.user.id
+
+    const [circle] = await CircleModel.getSingleCircle(circleId)
+    const circleData = circle[0]
+
+    if(circleData.leader_id !== leaderId) {
+        res.status(405).json({
+            message: 'Not Allowed'
+        })
+    }
+
+    try {
+        await CircleModel.deleteCircle(circleId)
+        
+        res.status(204).json({})
+    } catch (error) {
+        res.status(400).json({
+            message: message.error
+        })
+    }
+}
+
 module.exports = {
     createCircle,
-    editCircle
+    editCircle,
+    deleteCircle
 }

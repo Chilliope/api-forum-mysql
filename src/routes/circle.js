@@ -14,4 +14,7 @@ router.post('/circle', authMiddleware, uploadCircleImage.single('circle_image'),
 // PATCH - EDIT CIRCLE
 router.patch('/circle/:id', authMiddleware, uploadCircleImage.single('circle_image'), CircleController.editCircle)
 
+// DELETE - DELETE CIRCLE
+router.delete('/circle/:id', authMiddleware, CircleController.deleteCircle)
+
 module.exports = router
