@@ -6,6 +6,12 @@ const getSingleCircle = (id) => {
     return dbPool.execute(SQLQuery)
 }
 
+const getCirclyByLeader = (leaderId) => {
+    const SQLQuery = `SELECT * FROM circles WHERE leader_id = ${leaderId}`
+
+    return dbPool.execute(SQLQuery)
+}
+
 const createCircle = (body, currentDate, userId) => {
     const SQLQuery = `INSERT INTO circles (circle_name, circle_image, leader_id, created_at) VALUES (
         '${body.circle_name}',
@@ -14,6 +20,15 @@ const createCircle = (body, currentDate, userId) => {
         '${currentDate}'
     )`
 
+    return dbPool.execute(SQLQuery)
+}
+
+const updateCreatorCircle = (circleId, userId) => {
+    const SQLQuery = `UPDATE users
+                      SET
+                      circle_id = ${circleId}
+                      WHERE id = ${userId}`
+    
     return dbPool.execute(SQLQuery)
 }
 
@@ -36,7 +51,9 @@ const deleteCircle = (circleId) => {
 
 module.exports = {
     getSingleCircle,
+    getCirclyByLeader,
+    updateCreatorCircle,
     createCircle,
     editCircle,
-    deleteCircle
+    deleteCircle,
 }
