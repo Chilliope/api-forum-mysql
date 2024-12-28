@@ -6,7 +6,6 @@ const path = require('path')
 const editProfile = async (req, res) => {
     const { body, file } = req
     const id = req.user.id
-    
     try {
         const [ user ] = await profile.getProfile(id)
         // console.log('gambar:', user.image)

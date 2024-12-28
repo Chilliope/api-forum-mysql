@@ -5,13 +5,15 @@ const cors = require('cors')
 const path = require('path');
 
 const middlewareLogRequest = require('./middleware/logs')
-const upload = require('./middleware/multer')
+const { uploadProfilePicture } = require('./middleware/multer')
+const { uploadCircleImage } = require('./middleware/multer')
 
 const authRoutes = require('./routes/auth')
 const forumRoutes = require('./routes/forum')
 const postRoutes = require('./routes/post')
 const profileRoutes = require('./routes/profile')
 const yourPostRoutes = require('./routes/yourPost')
+const circleRoutes = require('./routes/circle')
 
 const app = express(middlewareLogRequest)
 
@@ -32,8 +34,15 @@ app.use(forumRoutes)
 app.use(postRoutes)
 app.use(profileRoutes)
 app.use(yourPostRoutes)
+app.use(circleRoutes)
 
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/upload', uploadProfilePicture.single('image'), (req, res) => {
+    res.json({
+        message: 'upload berhasil'
+    })
+})
+
+app.post('/upload', uploadCircleImage.single('circle_image'), (req, res) => {
     res.json({
         message: 'upload berhasil'
     })
