@@ -11,11 +11,11 @@ const getAllPost = (id, offset, limit) => {
     return dbPool.execute(SQLQuery)
 }
 
-const getAllYourPost = (user_id) => {
+const getAllYourPost = (userId) => {
     const SQLQuery = `SELECT * FROM posts 
-                      JOIN forum ON posts.forum_id = forum.id
+                      JOIN forums ON posts.forum_id = forums.id
                       JOIN users ON posts.user_id = users.id
-                      WHERE user_id = ${user_id}`
+                      WHERE posts.user_id = ${userId}`
 
     return dbPool.execute(SQLQuery)
 }

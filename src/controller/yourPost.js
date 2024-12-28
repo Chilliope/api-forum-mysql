@@ -3,8 +3,8 @@ const ForumModel = require('../models/forum')
 
 const getAllYourPost = async (req, res) => {
     try {
-        const user_id = req.user.id
-        const [data] = await PostModel.getAllYourPost(user_id)
+        const userId = req.user.id
+        const [data] = await PostModel.getAllYourPost(userId)
 
         res.status(200).json({
             message: 'Get All Your Post Success',
@@ -12,7 +12,7 @@ const getAllYourPost = async (req, res) => {
         })
     } catch (error) {
         res.status(404).json({
-            message: 'No Data'
+            message: error.message
         })
     }
 }
