@@ -3,7 +3,6 @@ const CircleModel = require('../models/circle')
 const createCircle = async (req, res) => {
     const { body, file } = req
     const currentDate = new Date().toISOString().split('T')[0];
-    console.log(file.originalname)
     try {
         const data = {
             circle_name: body.circle_name,
@@ -22,6 +21,39 @@ const createCircle = async (req, res) => {
     }
 }
 
+const editCircle = async (req, res) => {
+    const { body, file } = req
+    const circleId = req.params.id
+    const leaderId = req.user.id
+    console.log(file)
+    const [circle] = await CircleModel.getSingleCircle(circleId)
+    const circleData = circle[0]
+
+    if(circleData.leader_id !== leaderId) {
+        res.status(405).json({
+            message: 'Not Allowed'
+        })
+    }
+
+    try {
+        const data = {
+            circle_name: body.circle_name,
+            circle_image: file.filename
+        }
+            
+        await CircleModel.editCircle(data, circleId)
+            
+        res.status(201).json({
+            message: 'Circle Edited Successfully'
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+}
+
 module.exports = {
     createCircle,
+    editCircle
 }

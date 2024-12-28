@@ -11,4 +11,7 @@ const { uploadCircleImage } = require('../middleware/multer')
 // POST - CREATE CIRCLE
 router.post('/circle', authMiddleware, uploadCircleImage.single('circle_image'), CircleController.createCircle)
 
+// PATCH - EDIT CIRCLE
+router.patch('/circle/:id', authMiddleware, uploadCircleImage.single('circle_image'), CircleController.editCircle)
+
 module.exports = router
