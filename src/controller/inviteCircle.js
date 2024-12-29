@@ -1,6 +1,21 @@
 const inviteCircleModel = require('../models/inviteCircle')
 const userModel = require('../models/user')
 
+const getInviteByCircle = async (req, res) => {
+    try {
+        const [invites] = await inviteCircleModel.getInviteByCircle(req.user.circle_id)
+
+        res.status(200).json({
+            message: 'Get all invite by circle successfully',
+            invites: invites
+        })
+    } catch (error) {
+        res.status(400).json({
+            error: error.message
+        })        
+    }
+}
+
 const createInvite = async (req, res) => {
     try {
         const data = req.body
@@ -58,6 +73,7 @@ const deleteInvite = async (req, res) => {
 
 
 module.exports = {
+    getInviteByCircle,
     createInvite,
     deleteInvite
 }

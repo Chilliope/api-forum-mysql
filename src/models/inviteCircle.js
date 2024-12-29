@@ -1,5 +1,11 @@
 const dbPool = require('../config/database')
 
+const getInviteByCircle = (id) => {
+    const SQLQuery = `SELECT * FROM circle_invites WHERE circle_id = ${id}`
+
+    return dbPool.execute(SQLQuery)
+}
+
 const createInvite = (data) => {
     const SQLQuery = `INSERT INTO circle_invites (
                       invited_id,
@@ -28,6 +34,7 @@ const deleteInvite = (id) => {
 }
 
 module.exports = {
+    getInviteByCircle,
     createInvite,
     checkUserIsInvited,
     deleteInvite
