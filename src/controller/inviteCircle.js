@@ -39,7 +39,23 @@ const acceptInvite = async (req, res) => {
         await inviteCircleModel.deleteInvite(invites[0].id)
 
         res.status(201).json({
-            message: 'Circle Invited Successfully'
+            message: 'Circle Invited Accepted Successfully'
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+}
+
+const rejectInvite = async (req, res) => {
+    try {
+        const [invites] = await inviteCircleModel.getSingleInvite(parseInt(req.params.id))
+        console.log(invites)
+        await inviteCircleModel.deleteInvite(invites[0].id)
+
+        res.status(201).json({
+            message: 'Circle Invited Rejected Successfully'
         })
     } catch (error) {
         res.status(400).json({
@@ -108,6 +124,7 @@ module.exports = {
     getInviteByCircle,
     getInviteByUser,
     acceptInvite,
+    rejectInvite,
     createInvite,
     deleteInvite
 }
