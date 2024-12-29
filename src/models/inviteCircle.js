@@ -1,5 +1,11 @@
 const dbPool = require('../config/database')
 
+const getSingleInvite = (id) => {
+    const SQLQuery = `SELECT * FROM circle_invites WHERE id = ${id}`
+
+    return dbPool.execute(SQLQuery)
+}
+
 const getInviteByCircle = (id) => {
     const SQLQuery = `SELECT * FROM circle_invites WHERE circle_id = ${id}`
 
@@ -8,6 +14,15 @@ const getInviteByCircle = (id) => {
 
 const getInviteByUser = (id) => {
     const SQLQuery = `SELECT * FROM circle_invites WHERE invited_id = ${id}`
+
+    return dbPool.execute(SQLQuery)
+}
+
+const acceptInvite = (id, circle_id) => {
+    const SQLQuery = `UPDATE users SET
+                      circle_id = ${circle_id}
+                      WHERE id = ${id}
+                     `
 
     return dbPool.execute(SQLQuery)
 }
@@ -40,8 +55,10 @@ const deleteInvite = (id) => {
 }
 
 module.exports = {
+    getSingleInvite,
     getInviteByCircle,
     getInviteByUser,
+    acceptInvite,
     createInvite,
     checkUserIsInvited,
     deleteInvite

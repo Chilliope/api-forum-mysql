@@ -12,6 +12,9 @@ router.get('/invite-circle', authMiddleware, InviteCircleController.getInviteByC
 // GET - GET INVITE CIRCLE BY USER
 router.get('/user/invite-circle', authMiddleware, InviteCircleController.getInviteByUser)
 
+// POST - ACCEPT INVITE
+router.post('/accept/invite-circle/:id', authMiddleware, InviteCircleController.acceptInvite)
+
 // POST - CREATE INVITE
 router.post('/invite-circle', authMiddleware, InviteCircleController.createInvite)
 
