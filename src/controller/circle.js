@@ -12,9 +12,7 @@ const createCircle = async (req, res) => {
         await CircleModel.createCircle(data, currentDate, req.user.id)
         const [newCircle] = await CircleModel.getCirclyByLeader(req.user.id)
 
-        console.log(newCircle[0].id, req.user.id)
         await CircleModel.updateCreatorCircle(newCircle[0].id, req.user.id)
-
 
         res.status(201).json({
             message: 'Create Circle Success'

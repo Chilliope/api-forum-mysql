@@ -31,7 +31,8 @@ const login = async (req, res) => {
                 id: user.id,
                 username: user.username,
                 fullname: user.fullname,
-                image: user.image
+                image: user.image,
+                circle_id: user.circle_id
             },
             SECRET_KEY,
             { 
