@@ -6,6 +6,12 @@ const getInviteByCircle = (id) => {
     return dbPool.execute(SQLQuery)
 }
 
+const getInviteByUser = (id) => {
+    const SQLQuery = `SELECT * FROM circle_invites WHERE invited_id = ${id}`
+
+    return dbPool.execute(SQLQuery)
+}
+
 const createInvite = (data) => {
     const SQLQuery = `INSERT INTO circle_invites (
                       invited_id,
@@ -35,6 +41,7 @@ const deleteInvite = (id) => {
 
 module.exports = {
     getInviteByCircle,
+    getInviteByUser,
     createInvite,
     checkUserIsInvited,
     deleteInvite

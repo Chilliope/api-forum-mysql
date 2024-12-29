@@ -9,6 +9,9 @@ const authMiddleware = require('../middleware/auth')
 // GET - GET INVITE CIRCLE BY CIRCLE
 router.get('/invite-circle', authMiddleware, InviteCircleController.getInviteByCircle)
 
+// GET - GET INVITE CIRCLE BY USER
+router.get('/user/invite-circle', authMiddleware, InviteCircleController.getInviteByUser)
+
 // POST - CREATE INVITE
 router.post('/invite-circle', authMiddleware, InviteCircleController.createInvite)
 
