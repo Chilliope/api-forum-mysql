@@ -16,12 +16,19 @@ const createInvite = (data) => {
 }
 
 const checkUserIsInvited = (id) => {
-    const SQLQuery = `SELECT * FROM circle_invites WHERE invited_id = '${id}'`
+    const SQLQuery = `SELECT * FROM circle_invites WHERE invited_id = ${id}`
+
+    return dbPool.execute(SQLQuery)
+}
+
+const deleteInvite = (id) => {
+    const SQLQuery = `DELETE FROM circle_invites WHERE id = ${id}`
 
     return dbPool.execute(SQLQuery)
 }
 
 module.exports = {
     createInvite,
-    checkUserIsInvited
+    checkUserIsInvited,
+    deleteInvite
 }

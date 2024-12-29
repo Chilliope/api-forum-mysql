@@ -16,7 +16,6 @@ const createInvite = async (req, res) => {
 
         // Periksa apakah user sudah diundang
         const [checkUserIsInvited] = await inviteCircleModel.checkUserIsInvited(user[0].id)
-        console.log(checkUserIsInvited[0])
         if (checkUserIsInvited[0]) {
             return res.status(400).json({
                 message: 'This user was just invited'
@@ -45,7 +44,20 @@ const createInvite = async (req, res) => {
     }
 }
 
+const deleteInvite = async (req, res) => {
+    try {
+        await inviteCircleModel.deleteInvite(req.params.id)
+
+        res.status(204).json({})
+    } catch (error) {
+        res.status(400).json({
+            message: message.error
+        })
+    }
+} 
+
 
 module.exports = {
-    createInvite
+    createInvite,
+    deleteInvite
 }
