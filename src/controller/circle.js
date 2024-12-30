@@ -1,5 +1,19 @@
 const CircleModel = require('../models/circle')
 
+const getCircleByUser = async (req, res) => {
+    try {
+        const [data] = await CircleModel.getSingleCircle(req.user.circle_id)
+        res.status(201).json({
+            message: 'Get circle by user successfully',
+            data: data[0]
+        })
+    } catch (error) {
+        res.status(401).json({
+            message: 'Get circle by user failed'
+        })
+    }
+}
+
 const createCircle = async (req, res) => {
     const { body, file } = req
     const currentDate = new Date().toISOString().split('T')[0];
@@ -80,6 +94,7 @@ const deleteCircle = async (req, res) => {
 }
 
 module.exports = {
+    getCircleByUser,
     createCircle,
     editCircle,
     deleteCircle
