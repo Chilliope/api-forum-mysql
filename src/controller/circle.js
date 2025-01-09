@@ -93,9 +93,20 @@ const deleteCircle = async (req, res) => {
     }
 }
 
+const getRandomMember = async (req, res) => {
+    const circleId = req.user.circle_id
+
+    const [data] = await CircleModel.getRandomMember(circleId)
+
+    res.status(200).json({
+        data: data
+    })
+}
+
 module.exports = {
     getCircleByUser,
     createCircle,
     editCircle,
-    deleteCircle
+    deleteCircle,
+    getRandomMember
 }

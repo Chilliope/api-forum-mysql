@@ -20,4 +20,7 @@ router.patch('/circle/:id', authMiddleware, uploadCircleImage.single('circle_ima
 // DELETE - DELETE CIRCLE
 router.delete('/circle/:id', authMiddleware, CircleController.deleteCircle)
 
+// GET - GET RANDOM MEMBER
+router.get('/memberRandom', authMiddleware, CircleController.getRandomMember)
+
 module.exports = router

@@ -18,12 +18,22 @@ const inviteCircleRoutes = require('./routes/inviteCircle')
 
 const app = express(middlewareLogRequest)
 
-// Konfigurasi CORS
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://adce-125-164-96-249.ngrok-free.app'
+];
+
 app.use(cors({
-    origin: 'http://localhost:5173', // Ganti dengan origin frontend Anda
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Origin not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Metode HTTP yang diizinkan
     credentials: true // Jika menggunakan cookie
-}))
+}));
 
 app.use(express.json())
 app.use(express.static('public'))

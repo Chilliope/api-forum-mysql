@@ -49,6 +49,19 @@ const deleteCircle = (circleId) => {
     return dbPool.execute(SQLQuery)
 }
 
+const getRandomMember = (circleId) => {
+    const SQLQuery = `
+        SELECT * 
+        FROM users 
+        WHERE circle_id = ${circleId} 
+        ORDER BY RAND() 
+        LIMIT 5
+    `;
+
+
+    return dbPool.execute(SQLQuery)
+}
+
 module.exports = {
     getSingleCircle,
     getCirclyByLeader,
@@ -56,4 +69,5 @@ module.exports = {
     createCircle,
     editCircle,
     deleteCircle,
+    getRandomMember
 }
