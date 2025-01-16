@@ -1,5 +1,20 @@
 const developerPostModel = require('../models/developerPost')
 
+const getDeveloperPost = async (req, res) => {
+    try {
+        const [ data ] = await developerPostModel.getDeveloperPost()
+
+        res.status(200).json({
+            message: 'Get developer post successfully',
+            data: data
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+}
+
 const createDeveloperPost = async (req, res) => {
     const userId = req.user.id
     const { body } = req
@@ -25,5 +40,6 @@ const createDeveloperPost = async (req, res) => {
 }
 
 module.exports = {
+    getDeveloperPost,
     createDeveloperPost
 }
