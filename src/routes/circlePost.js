@@ -15,4 +15,7 @@ router.post('/createCirclePost', authMiddleware, circlePostController.createCirc
 // PATCH - EDIT CIRCLE POST
 router.patch('/editCirclePost/:id', authMiddleware, circlePostController.editCirclePost)
 
+// DELETE - DELETE CIRCLE POST
+router.delete('/deleteCirclePost/:id', authMiddleware, circlePostController.deleteCirclePost)
+
 module.exports = router

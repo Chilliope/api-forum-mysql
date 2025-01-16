@@ -64,8 +64,23 @@ const editCirclePost = async (req, res) => {
     }
 }
 
+const deleteCirclePost = async (req, res) => {
+    const circlePostId = req.params.id
+
+    try {
+        await circlePostModel.deleteCirclePost(circlePostId)
+
+        res.status(204).json({})
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+}
+
 module.exports = {
     getCirclePost,
     createCirclePost,
-    editCirclePost
+    editCirclePost,
+    deleteCirclePost
 }

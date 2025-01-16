@@ -27,8 +27,15 @@ const editCirclePost = (data) => {
     return dbPool.execute(SQLQuery)
 }
 
+const deleteCirclePost = (id) => {
+    const SQLQuery = `DELETE FROM circle_post WHERE id = ${id}`
+
+    return dbPool.execute(SQLQuery)
+}
+
 module.exports = {
     getCirclePost,
     createCirclePost,
-    editCirclePost
+    editCirclePost,
+    deleteCirclePost
 }
