@@ -12,4 +12,7 @@ router.get('/getDeveloperPost', authMiddleware, developerPostController.getDevel
 // POST - CREATE DEVELOPER POST
 router.post('/createDeveloperPost', authMiddleware, developerPostController.createDeveloperPost)
 
+// PATCH - EDIT DEVELOPER POST
+router.patch('/editDeveloperPost/:id', authMiddleware, developerPostController.editDeveloperPost)
+
 module.exports = router

@@ -17,8 +17,18 @@ const createDeveloperPost = (data) => {
     return dbPool.execute(SQLQuery)
 }
 
+const editDeveloperPost = (data) => {
+    const SQLQuery = `UPDATE developer_post 
+                      SET
+                      post = '${data.post}'
+                      WHERE id = ${data.id}`
+
+    return dbPool.execute(SQLQuery)
+}
+
 
 module.exports = {
     getDeveloperPost,
-    createDeveloperPost
+    createDeveloperPost,
+    editDeveloperPost
 }

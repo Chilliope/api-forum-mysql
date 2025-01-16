@@ -39,7 +39,30 @@ const createDeveloperPost = async (req, res) => {
     }
 }
 
+const editDeveloperPost = async (req, res) => {
+    const postId = req.params.id
+    const { body } = req
+
+    try {
+        const data = {
+            id: postId,
+            post: body.post
+        }
+
+        await developerPostModel.editDeveloperPost(data)
+
+        res.status(201).json({
+            message: 'Edit developer post successfully'
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+}
+
 module.exports = {
     getDeveloperPost,
-    createDeveloperPost
+    createDeveloperPost,
+    editDeveloperPost
 }
