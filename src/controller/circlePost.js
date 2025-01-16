@@ -41,7 +41,31 @@ const createCirclePost = async (req, res) => {
     }
 }
 
+const editCirclePost = async (req, res) => {
+    const { body } = req
+    const circlePostId = req.params.id
+
+    try {
+        console.log(body.post, circlePostId)
+        const data = {
+            post: body.post,
+            circle_id: circlePostId
+        }
+
+        await circlePostModel.editCirclePost(data)
+
+        res.status(201).json({
+            message: 'Circle post edited successfully'
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+}
+
 module.exports = {
     getCirclePost,
-    createCirclePost
+    createCirclePost,
+    editCirclePost
 }

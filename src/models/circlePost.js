@@ -18,7 +18,17 @@ const createCirclePost = (data) => {
     return dbPool.execute(SQLQuery)
 }
 
+const editCirclePost = (data) => {
+    const SQLQuery = `UPDATE circle_post
+                      SET
+                      post = '${data.post}'
+                      WHERE id = ${data.circle_id}`
+
+    return dbPool.execute(SQLQuery)
+}
+
 module.exports = {
+    getCirclePost,
     createCirclePost,
-    getCirclePost
+    editCirclePost
 }

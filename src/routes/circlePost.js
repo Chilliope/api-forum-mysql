@@ -12,4 +12,7 @@ router.get('/getCirclePost', authMiddleware, circlePostController.getCirclePost)
 // POST - CREATE CIRCLE POST
 router.post('/createCirclePost', authMiddleware, circlePostController.createCirclePost)
 
+// PATCH - EDIT CIRCLE POST
+router.patch('/editCirclePost/:id', authMiddleware, circlePostController.editCirclePost)
+
 module.exports = router
