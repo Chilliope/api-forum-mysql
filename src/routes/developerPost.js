@@ -15,4 +15,7 @@ router.post('/createDeveloperPost', authMiddleware, developerPostController.crea
 // PATCH - EDIT DEVELOPER POST
 router.patch('/editDeveloperPost/:id', authMiddleware, developerPostController.editDeveloperPost)
 
+// DELETE - DELETE DEVELOPER POST
+router.delete('/deleteDeveloperPost/:id', authMiddleware, developerPostController.deleteDeveloperPost)
+
 module.exports = router

@@ -26,9 +26,15 @@ const editDeveloperPost = (data) => {
     return dbPool.execute(SQLQuery)
 }
 
+const deleteDeveloperPost = (id) => {
+    const SQLQuery = `DELETE FROM developer_post WHERE id = ${id}`
+
+    return dbPool.execute(SQLQuery)
+}
 
 module.exports = {
     getDeveloperPost,
     createDeveloperPost,
-    editDeveloperPost
+    editDeveloperPost,
+    deleteDeveloperPost
 }
