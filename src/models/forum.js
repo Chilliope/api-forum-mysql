@@ -5,26 +5,9 @@ const getTotalForumCount = () => {
     return dbPool.execute(SQLQuery);
 }
 
-const getAllForum = (offset, limit) => {
+const getAllForum = () => {
     const SQLQuery = `
-        SELECT 
-            forums.id AS forum_id, 
-            forums.user_id, 
-            forums.title, 
-            forums.created_at,
-            users.fullname, 
-            users.username, 
-            users.password, 
-            users.image,
-            (
-                SELECT COUNT(*) 
-                FROM posts 
-                WHERE posts.forum_id = forums.id
-            ) AS post_count -- Hitung jumlah post dengan forum_id yang sesuai
-        FROM forums
-        JOIN users ON forums.user_id = users.id
-        ORDER BY forums.id DESC -- Urutkan berdasarkan ID dari yang terbaru
-        LIMIT ${limit} OFFSET ${offset}
+        SELECT * FROM forums
     `
 
     return dbPool.execute(SQLQuery)

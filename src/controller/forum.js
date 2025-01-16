@@ -3,25 +3,10 @@ const PostModel = require('../models/post')
 
 const getAllForum = async (req, res) => {
     try {
-        const page = parseInt(req.query.page) || 1 // Default page = 1
-        const limit = parseInt(req.query.limit) || 10 // Default limit = 10
-        const offset = (page - 1) * limit
-
-        const [data] = await ForumModel.getAllForum(offset, limit)
-
-        const [totalDataResult] = await ForumModel.getTotalForumCount()
-        const totalData = totalDataResult[0].total
-
-        totalPage = Math.ceil(totalData / limit)
-
+        const [data] = await ForumModel.getAllForum()
         res.status(200).json({
             message: 'Get All Forum Success',
             data: data,
-            pagination: {
-                currentPage: page,
-                limit: limit,
-                totalPage: totalPage,
-            },
         })
     } catch (error) {
         res.status(404).json({
