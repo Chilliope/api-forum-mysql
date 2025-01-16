@@ -16,7 +16,7 @@ const editProfile = async (req, res) => {
             image: file ? file.filename : user.image
         }
 
-        const oldImagePath = path.join(__dirname, '../../public/profile_picture', user.image)
+        const oldImagePath = path.join(__dirname, '../../public/storage/profile_picture', user.image)
 
         if(data.image != user.image) {
             if(user.image != 'default.jpg') {

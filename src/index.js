@@ -15,6 +15,7 @@ const profileRoutes = require('./routes/profile')
 const yourPostRoutes = require('./routes/yourPost')
 const circleRoutes = require('./routes/circle')
 const inviteCircleRoutes = require('./routes/inviteCircle')
+const cirlePostRoutes = require('./routes/circlePost')
 
 const app = express(middlewareLogRequest)
 
@@ -47,6 +48,7 @@ app.use(profileRoutes)
 app.use(yourPostRoutes)
 app.use(circleRoutes)
 app.use(inviteCircleRoutes)
+app.use(cirlePostRoutes)
 
 app.post('/upload', uploadProfilePicture.single('image'), (req, res) => {
     res.json({
