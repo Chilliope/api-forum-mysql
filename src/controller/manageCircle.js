@@ -12,12 +12,28 @@ const getAllCircleMember = async (req, res) => {
         })
     } catch (error) {
         res.json(400).json({
-            message: 'Forum Delete Failed',
+            error: error.message
+        }) 
+    }
+}
+
+const kickMember = async (req, res) => {
+    const userId = req.params.id
+
+    try {
+        await manageCircleModel.kickMember(userId)
+
+        res.status(201).json({
+            message: 'Kick member successfully'
+        })
+    } catch (error) {
+        res.json(400).json({
             error: error.message
         }) 
     }
 }
 
 module.exports = {
-    getAllCircleMember
+    getAllCircleMember,
+    kickMember
 }

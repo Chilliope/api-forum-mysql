@@ -6,6 +6,16 @@ const getAllCircleMember = (id) => {
     return dbPool.execute(SQLQuery)
 }
 
+const kickMember = (id) => {
+    const SQLQuery = `UPDATE USERS
+                      SET
+                      circle_id = NULL
+                      WHERE id = ${id}`
+
+    return dbPool.execute(SQLQuery)
+}
+
 module.exports = {
-    getAllCircleMember
+    getAllCircleMember,
+    kickMember
 }
