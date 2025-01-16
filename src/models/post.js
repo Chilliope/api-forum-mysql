@@ -1,7 +1,7 @@
 const dbPool = require('../config/database')
 
 const getAllPost = (id) => {
-    const SQLQuery = `SELECT * FROM posts WHERE forum_id = ${id}`
+    const SQLQuery = `SELECT * FROM posts JOIN users ON posts.user_id = users.id WHERE forum_id = ${id}`
 
     return dbPool.execute(SQLQuery)
 }
