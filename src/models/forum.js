@@ -1,17 +1,33 @@
 const dbPool = require('../config/database')
 
 const getTotalForumCount = () => {
-    const SQLQuery = 'SELECT COUNT(*) AS total FROM forums';
-    return dbPool.execute(SQLQuery);
+    const SQLQuery = 'SELECT COUNT(*) AS total FROM forums'
+    return dbPool.execute(SQLQuery)
 }
 
 const getAllForum = () => {
     const SQLQuery = `
-        SELECT * FROM forums
+        SELECT 
+            forums.id AS forum_id, 
+            forums.user_id, 
+            forums.title, 
+            forums.created_at,
+            users.fullname, 
+            users.username, 
+            users.password, 
+            users.image,
+            (
+                SELECT COUNT(*) 
+                FROM posts 
+                WHERE posts.forum_id = forums.id
+            ) AS post_count
+        FROM forums
+        JOIN users ON forums.user_id = users.id
     `
 
     return dbPool.execute(SQLQuery)
 }
+
 
 const getSingleForum = (forumId) => {
     const SQLQuery = `SELECT             
