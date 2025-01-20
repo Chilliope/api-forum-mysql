@@ -23,6 +23,7 @@ const getAllForum = () => {
             ) AS post_count
         FROM forums
         JOIN users ON forums.user_id = users.id
+        ORDER BY forums.id DESC
     `
 
     return dbPool.execute(SQLQuery)

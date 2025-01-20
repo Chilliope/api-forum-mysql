@@ -1,7 +1,16 @@
 const dbPool = require('../config/database')
 
 const getDeveloperPost = () => {
-    const SQLQuery = `SELECT * FROM developer_post`
+    const SQLQuery = `SELECT 
+    developer_post.id,
+    developer_post.user_id,
+    developer_post.post,
+    users.fullname,
+    users.username,
+    users.image
+    FROM developer_post 
+    JOIN users ON developer_post.user_id = users.id
+    ORDER BY developer_post.id DESC`
 
     return dbPool.execute(SQLQuery)
 }

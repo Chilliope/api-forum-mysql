@@ -4,26 +4,29 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path');
 
-const middlewareLogRequest = require('./middleware/logs')
-const { uploadProfilePicture } = require('./middleware/multer')
-const { uploadCircleImage } = require('./middleware/multer')
+const middlewareLogRequest = require('./src/middleware/logs')
+const { uploadProfilePicture } = require('./src/middleware/multer')
+const { uploadCircleImage } = require('./src/middleware/multer')
 
-const authRoutes = require('./routes/auth')
-const forumRoutes = require('./routes/forum')
-const postRoutes = require('./routes/post')
-const profileRoutes = require('./routes/profile')
-const yourPostRoutes = require('./routes/yourPost')
-const circleRoutes = require('./routes/circle')
-const inviteCircleRoutes = require('./routes/inviteCircle')
-const cirlePostRoutes = require('./routes/circlePost')
-const manageCircleRoutes = require('./routes/manageCircle')
-const developerPostRoutes = require('./routes/developerPost')
+const authRoutes = require('./src/routes/auth')
+const forumRoutes = require('./src/routes/forum')
+const postRoutes = require('./src/routes/post')
+const profileRoutes = require('./src/routes/profile')
+const yourPostRoutes = require('./src/routes/yourPost')
+const circleRoutes = require('./src/routes/circle')
+const inviteCircleRoutes = require('./src/routes/inviteCircle')
+const cirlePostRoutes = require('./src/routes/circlePost')
+const manageCircleRoutes = require('./src/routes/manageCircle')
+const developerPostRoutes = require('./src/routes/developerPost')
 
 const app = express(middlewareLogRequest)
 
 const allowedOrigins = [
     'http://localhost:5173',
-    'https://adce-125-164-96-249.ngrok-free.app'
+    'http://localhost:5174',
+    'http://127.0.0.1:5500',
+    'https://thecorner.republikode.my.id',
+    'http://localhost:4173'
 ];
 
 app.use(cors({
@@ -53,6 +56,10 @@ app.use(inviteCircleRoutes)
 app.use(cirlePostRoutes)
 app.use(manageCircleRoutes)
 app.use(developerPostRoutes)
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
 
 app.post('/upload', uploadProfilePicture.single('image'), (req, res) => {
     res.json({
