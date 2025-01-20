@@ -17,27 +17,27 @@ const getAllPost = (id) => {
     return dbPool.execute(SQLQuery)
 }
 
-    const getAllYourPost = (userId) => {
-        const SQLQuery = `SELECT 
-                        posts.id as post_id,
-                        posts.user_id as user_post_id,
-                        posts.forum_id,
-                        posts.post,
-                        users.fullname,
-                        users.username,
-                        users.image,
-                        forums.title,
-                        forum_user.fullname as forum_fullname,
-                        forum_user.username as forum_username,
-                        forum_user.image as forum_image
-                        FROM posts 
-                        JOIN forums ON posts.forum_id = forums.id
-                        JOIN users ON posts.user_id = users.id
-                        JOIN users as forum_user ON forums.user_id = forum_user.id
-                        WHERE posts.user_id = ${userId}`
+const getAllYourPost = (userId) => {
+    const SQLQuery = `SELECT 
+                    posts.id as post_id,
+                    posts.user_id as user_post_id,
+                    posts.forum_id,
+                    posts.post,
+                    users.fullname,
+                    users.username,
+                    users.image,
+                    forums.title,
+                    forum_user.fullname as forum_fullname,
+                    forum_user.username as forum_username,
+                    forum_user.image as forum_image
+                    FROM posts 
+                    JOIN forums ON posts.forum_id = forums.id
+                    JOIN users ON posts.user_id = users.id
+                    JOIN users as forum_user ON forums.user_id = forum_user.id
+                    WHERE posts.user_id = ${userId}`
 
-        return dbPool.execute(SQLQuery)
-    }
+    return dbPool.execute(SQLQuery)
+}
 
 const createNewPost = (body) => {
     const SQLQuery = `INSERT INTO posts (user_id, forum_id, post, created_at)
